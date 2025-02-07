@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@coreui/coreui": "^5.0.0-alpha.1",
+    "@coreui/coreui": "^4.3.0",
     "@coreui/react": "^4.11.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
