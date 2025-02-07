@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./public/seat.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateSeatOrientation from "./theater/theater_orientation";
