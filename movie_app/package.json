@@ -84,5 +84,10 @@
     "@babel/helper-compilation-targets": "7.19.3",
     "@babel/helper-create-class-features-plugin": "7.19.0",
     "@babel/helper-module-transforms": "7.19.6"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
