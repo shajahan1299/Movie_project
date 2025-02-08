@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { baseUrl } from "../../config/config";
 import { toast, Toaster } from 'react-hot-toast';
-import GoogleauthLogin from '../googleauth/googleauth_userreg';
+
 import GoogleauthUserReg from '../googleauth/googleauth_userreg';
 
 function Register() {
@@ -134,112 +134,108 @@ function Register() {
         <div className="card-body">
 
 
-          <form role="form text-left"  onSubmit={handleSubmit(onSubmit)}>
-           
-            <GoogleauthUserReg/>
-            <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
-              <input type="text" 
-                     name="username"
-                     {...register("username", validationRules.username)}
-                     className={`form-control ${ errors.username ? "is-invalid" : ""}`} 
-                     placeholder="Full Name" 
-                     aria-label="username" 
-                     aria-describedby="username-addon" />
-            </div>
-            <p className="text-danger">
-                                {" "}
-                                {errors?.username && errors.username.message}
-            </p>
+        <form className="text-left" onSubmit={handleSubmit(onSubmit)}>
 
+  <GoogleauthUserReg />
+  
+  <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
+    <input
+      type="text"
+      name="username"
+      {...register("username", validationRules.username)}
+      className={`form-control ${errors.username ? "is-invalid" : ""}`}
+      placeholder="Full Name"
+      aria-label="username"
+      aria-describedby="username-addon"
+    />
+  </div>
+  <p className="text-danger">{errors?.username && errors.username.message}</p>
 
-            <div className="mb-3">
-              <input type="email" 
-              name="email"
-              {...register("email", validationRules.email)}
-              className={`form-control ${errors.email ? "is-invalid" : ""}`} 
-                placeholder="User Email" aria-label="email" 
-                aria-describedby="email-addon" />
-            </div>
+  <div className="mb-3">
+    <input
+      type="email"
+      name="email"
+      {...register("email", validationRules.email)}
+      className={`form-control ${errors.email ? "is-invalid" : ""}`}
+      placeholder="User Email"
+      aria-label="email"
+      aria-describedby="email-addon"
+    />
+  </div>
+  <p className="text-danger">{errors?.email && errors.email.message}</p>
 
-            
-            <p className="text-danger">{" "}{errors?.email && errors.email.message}</p>
-             <div className="mb-3">
-              <input type="text" 
-              name="phone"
-              {...register("phone", validationRules.phone)}
-              className={`form-control ${errors.phone ? "is-invalid" : ""}`} 
-                placeholder="Phone Number" aria-label="phone" 
-                aria-describedby="phone-addon" />
-            </div>
-            <p className="text-danger">{" "}{errors?.phone && errors.phone.message}</p>
+  <div className="mb-3">
+    <input
+      type="text"
+      name="phone"
+      {...register("phone", validationRules.phone)}
+      className={`form-control ${errors.phone ? "is-invalid" : ""}`}
+      placeholder="Phone Number"
+      aria-label="phone"
+      aria-describedby="phone-addon"
+    />
+  </div>
+  <p className="text-danger">{errors?.phone && errors.phone.message}</p>
 
+  <div className="mb-3">
+    Date of Birth:
+    <input
+      type="date"
+      name="dob"
+      {...register("dob", validationRules.dob)}
+      className={`form-control ${errors.dob ? "is-invalid" : ""}`}
+      placeholder="Date of Birth (YYYY-MM-DD)"
+      aria-label="dob"
+      aria-describedby="dob-addon"
+    />
+  </div>
+  <p className="text-danger">{errors?.dob && errors.dob.message}</p>
 
-            
+  <div className="mb-3">
+    <input
+      type="password"
+      name="password"
+      {...register("password", validationRules.password)}
+      className={`form-control ${errors.password ? "is-invalid" : ""}`}
+      placeholder="Set Password"
+      aria-label="password"
+      aria-describedby="dob-addon"
+    />
+  </div>
+  <p className="text-danger">{errors?.password && errors.password.message}</p>
 
-            <div className="mb-3">
-            Date of Birth:
-              <input type="date" 
-              name="dob"
-              {...register("dob", validationRules.dob)}
-              className={`form-control ${errors.dob ? "is-invalid" : ""}`} 
-                placeholder=" Date of Birth (YYYY-MM-DD)"  
-                 aria-label="dob" 
-                aria-describedby="dob-addon" />
-            </div>
-            <p className="text-danger">{" "}{errors?.dob && errors.dob.message}</p>
+  <div className="mb-3">
+    <input
+      type="password"
+      name="confirmPassword"
+      {...register("confirmPassword", validationRules.confirmPassword)}
+      className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
+      placeholder="Confirm Password"
+      aria-label="confirmPassword"
+      aria-describedby="Confirm Password-addon"
+    />
+  </div>
+  <p className="text-danger">{errors?.confirmPassword && errors.confirmPassword.message}</p>
 
+  <div className="text-center">
+    <button
+      type="submit"
+      name="testname"
+      className="attractive-button btn-block btn-lg shadow-lg mt-5"
+    >
+      Register
+    </button>
+  </div>
 
-            <div className="mb-3">
-              <input type="password" 
-              name="password"
-              {...register("password", validationRules.password)}
-              className={`form-control ${errors.password ? "is-invalid" : ""}`} 
-                placeholder="Set Password" aria-label="password" 
-                aria-describedby="dob-addon" />
-            </div>
-            <p className="text-danger">{" "}{errors?.password && errors.password.message}</p>
+  <p className="text-sm mt-3 mb-0">
+    Already have an account? <Link to="/" className="font-bold">Login</Link>
+  </p>
 
+  <p>
+    <Link to="/forgotpwd" className="font-bold">Forgot password?</Link>
+  </p>
+</form>
 
-            <div className="mb-3">
-              <input type="password" 
-              name="confirmPassword"
-              {...register("confirmPassword", validationRules.confirmPassword)}
-              className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`} 
-                placeholder="Confirm Password" aria-label="confirmPassword" 
-                aria-describedby="Confirm Password-addon" />
-            </div>
-            <p className="text-danger">{" "}{errors?.confirmPassword && errors.confirmPassword.message}</p>
-
-
-
-
-            {/* <div className="form-check form-check-info text-left">
-              <input className="form-check-input" type="checkbox" defaultValue id="flexCheckDefault" defaultChecked />
-              <label className="form-check-label" htmlFor="flexCheckDefault">
-                I agree the <a href="javascript:;" className="text-dark font-weight-bolder">Terms and Conditions</a>
-              </label>
-            </div> */}
-
-            <div className="text-center">
-              <button type="submit" 
-              name="testname"
-              className="attractive-button btn-block btn-lg shadow-lg mt-5">Register</button>
-            </div>
-
-           
-
-            <p className="text-sm mt-3 mb-0">
-                  Already have an account? 
-                  <Link to="/">
-                  <a  className="font-bold">
-                    Login 
-                  </a>
-                  </Link>
-            </p>
-            <p>
-                  <Link to="/forgotpwd"><a className="font-bold">Forgot password?</a></Link>
-            </p>
-          </form>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React from "react";
+//import { Link, useNavigate } from "react-router-dom";
+//import { useDispatch } from "react-redux";
 import EventSidebar from "../componets/event-siderbar";
 import EventHome from "../componets/event-home";
 

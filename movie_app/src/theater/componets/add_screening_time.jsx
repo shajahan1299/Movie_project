@@ -6,26 +6,28 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import GoBackButton from "../../public/gobackButton";
+//import GoBackButton from "../../public/gobackButton";
 import axios from "axios";
 import { baseUrl } from "../../config/config";
 
 function AddScreeningTime(props) {
   const [showtimes, setShowtimes] = useState([]);
   const [refresh,setRefresh] = useState(false); 
-  const [id, setId] = useState(props.screenid); // Initialize id with the screenid prop
+ // const [id, setId] = useState(props.screenid); // Initialize id with the screenid prop
+ const [id] = useState(props.screenid);
+ useEffect(() => {
+  if (!id) return; // Ensure 'id' is available before making the request
 
-  useEffect(() => {
-    axios.get(`${baseUrl}/api/getshowtime/${id}`)
-      .then((response) => {
-        if (response.data) {
-          setShowtimes(response.data);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [refresh]);
+  axios.get(`${baseUrl}/api/getshowtime/${id}`)
+    .then((response) => {
+      if (response.data) {
+        setShowtimes(response.data);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, [id, refresh]);
 
   const initialTime = dayjs().hour(12).minute(0); // Initialize with 12:00 PM
   const [selectedTime, setSelectedTime] = React.useState(initialTime);

@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../config/config";
 import TheaterSidebar from "../SideBar/theater_sidebar";
-import { Chart } from "react-google-charts";
-import { Link, useNavigate } from "react-router-dom";
+//import { Chart } from "react-google-charts";
+import { useNavigate } from "react-router-dom";
 import GoBackButton from "../../public/gobackButton";
 
 function ViewStatisticsPage() {
@@ -48,7 +48,8 @@ function ViewStatisticsPage() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [screenid]); // ✅ Include 'screenid' in dependencies
+  
 
   const renderPieChart = () => {
     if (!chartData || Object.keys(chartData).length === 0) {
@@ -59,7 +60,7 @@ function ViewStatisticsPage() {
 
     return Object.entries(chartData).map(([date, count]) => {
       const data = [["Task", "Count"]];
-      const ratio = count / seatcount;
+      //const ratio = count / seatcount;
 
       data.push(["UnBooked", Math.max(0, seatcount - count)]);
       data.push(["Booked", Math.min(seatcount, count)]);

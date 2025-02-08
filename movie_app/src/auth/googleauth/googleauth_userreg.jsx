@@ -3,21 +3,21 @@
 
 //Client secret
 //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
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+//import {  useNavigate } from "react-router-dom";
+//import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { GoogleLogin } from "react-google-login";
 import { baseUrl } from "../../config/config";
 import { gapi } from "gapi-script";
-import { login } from "../../Redux/user/userSlice";
+//import { login } from "../../Redux/user/userSlice";
 
 const client_id =
   "415883522909-affclmvul298eml0ai6tlvs7m3lruo33.apps.googleusercontent.com";
 
 function GoogleauthUserReg() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  //const dispatch = useDispatch();
+  //const navigate = useNavigate();
 
   useEffect(() => {
     gapi.load("client:auth2", () => {

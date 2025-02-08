@@ -22,7 +22,7 @@ function AdminViewTheaterLogin() {
   const usersPerPage = 20;
   const [theaters, setTheaters] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [statusUpdated, setStatusUpdated] = useState(false);
+  const [statusUpdated] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {

@@ -26,6 +26,8 @@ function Subscription() {
 
   useEffect(() => {
     const fetchSubscriptionPlan = async () => {
+      if (!userId) return; // Prevent API call if userId is null
+
       try {
         const response = await axios.get(
           `${baseUrl}/api/get-my-subscriptions/${userId}`
@@ -36,8 +38,10 @@ function Subscription() {
         console.error("Error fetching subscription plan:", error);
       }
     };
+
     fetchSubscriptionPlan();
-  }, [refresh]);
+  }, [userId, refresh]); // ✅ Added userId to the dependency array
+
 
   async function displayRazorpay(totalPrice, plan) {
     const subscription_plan = plan;

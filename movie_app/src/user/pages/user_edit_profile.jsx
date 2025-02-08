@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Footer from '../../footer/footer';
 import UserNavBar from '../usernavbar/usernavbar';
@@ -120,10 +120,11 @@ function UserEditProfile() {
                 Date of Birth:
                 {dob === 'googleauth' ? (
                   <img
-                    style={{ width: '70px', height: '42px' }}
-                    src="assets/googleauth/verifiedlogo.png"
-                    alt="Google Auth Image"
-                  />
+  style={{ width: "70px", height: "42px" }}
+  src="assets/googleauth/verifiedlogo.png"
+  alt="Google authentication verified logo"
+/>
+
                 ) : (
                   <></>
                 )}
@@ -142,11 +143,11 @@ function UserEditProfile() {
               <div className="mb-3">
                 Phone Number
                 {phone === 'googleauth' ? (
-                  <img
-                    style={{ width: '70px', height: '42px' }}
-                    src="assets/googleauth/verifiedlogo.png"
-                    alt="Google Auth Image"
-                  />
+               <img
+  style={{ width: "70px", height: "42px" }}
+  src="assets/googleauth/verifiedlogo.png"
+  alt="Google Auth Verified Logo"
+/>
                 ) : (
                   <></>
                 )}

@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import Footer from "../../../footer/footer";
 import UserNavBar from "../../usernavbar/usernavbar";
 import { useNavigate } from "react-router-dom";
 import GoBackButton from "../../../public/gobackButton";
 import { TMBDAPI } from "../../../config/config";
+import { usePage } from "../../../config/PageContext";
 
-import { usePage } from '../../../config/PageContext';
 
 function ExploreHome() {
   const navigate = useNavigate();
   const { page, setPage, selectedLanguage, setSelectedLanguage } = usePage();
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
- 
 
-  const fetchData = async () => {
+  // Memoized fetchData function to prevent unnecessary re-creations
+  const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -40,11 +41,12 @@ function ExploreHome() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [page, selectedLanguage]); // Dependencies
 
+  // Call fetchData when page or selectedLanguage changes
   useEffect(() => {
     fetchData();
-  }, [page, selectedLanguage]);
+  }, [fetchData]);
 
   const NextPage = () => {
     setPage((prevPage) => prevPage + 1);
@@ -97,13 +99,13 @@ function ExploreHome() {
                       onClick={PreviewsPage}
                       style={{ cursor: "pointer" }}
                     >
-                      <a className="page-link">Previous</a>
+                    <Link to="/previous-page" className="page-link">Previous</Link>
                     </li>
 
                     <li className="page-item active">
-                      <a className="page-link" href="#">
+                    <Link to={`/page/${page}`} className="page-link">
                         {page} <span className="sr-only"></span>
-                      </a>
+                      </Link>
                     </li>
 
                     <li
@@ -111,7 +113,7 @@ function ExploreHome() {
                       onClick={NextPage}
                       style={{ cursor: "pointer" }}
                     >
-                      <a className="page-link">Next</a>
+                      <Link to="/next-page" className="page-link">Next</Link>
                     </li>
                   </ul>
                 </div>

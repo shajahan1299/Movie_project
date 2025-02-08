@@ -72,25 +72,22 @@ function OTP() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data.password);
-    console.log(email);
-    axios
-      .patch(`${baseUrl}/api/forgotpassword/reset-password`, {
+    try {
+      console.log(data.password);
+      console.log(email);
+      const response = await axios.patch(`${baseUrl}/api/forgotpassword/reset-password`, {
         email: email,
-        newPassword:data.password
-      }) .then((response) => {
-        alert(response.data.message);
-        console.log('Password reset successful:', response.data.message);
-        navigate("/");
-     
-      })
-      .catch((error) => {
-        alert(error.response.data.error);
-        console.error('Error resetting password:', error.response.data.error);
-    
+        newPassword: data.password
       });
-  }
-
+      alert(response.data.message);
+      console.log('Password reset successful:', response.data.message);
+      navigate("/");
+    } catch (error) {
+      alert(error.response?.data?.error || "Something went wrong");
+      console.error('Error resetting password:', error.response?.data?.error);
+    }
+  };
+  
   return (
     <>
       {mystate ? (
@@ -146,8 +143,9 @@ function OTP() {
         <div>
           <br />
           <br />
-          <form role="form text-left" onSubmit={handleSubmit(onSubmit)}>
-            <div className="container">
+          <form className="text-left" onSubmit={handleSubmit(onSubmit)}>
+
+           <div className="container">
               <div className="row mt-lg-n10 mt-md-n11 mt-n10">
                 <div
                   className="col-xl-4 col-lg-5 col-md-7 mx-auto"

@@ -7,7 +7,7 @@ import GoBackButton from '../../public/gobackButton';
 
 function AdminViewUsers() {
   const [blockReason, setBlockReason] = useState('');
-  const [usersPerPage, setUsersPerPage] = useState(15);
+  const [usersPerPage] = useState(15);
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [refresh, setRefresh] = useState(false);
@@ -79,8 +79,31 @@ function AdminViewUsers() {
               <tr key={user.id}>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td>{user.phone === 'googleauth' ? <img style={{ width: '70px', height: '42px' }} src="assets/googleauth/verifiedlogo.png" alt="Google Auth Image" /> : user.phone}</td>
-                <td>{user.dob === 'googleauth' ? <img style={{ width: '70px', height: '42px' }} src="assets/googleauth/verifiedlogo.png" alt="Google Auth Image" /> : user.dob}</td>
+               
+                <td>
+  {user.phone === "googleauth" ? (
+    <img
+      style={{ width: "70px", height: "42px" }}
+      src="assets/googleauth/verifiedlogo.png"
+      alt="Google Auth Verified"
+    />
+  ) : (
+    user.phone
+  )}
+</td>
+
+<td>
+  {user.dob === "googleauth" ? (
+    <img
+      style={{ width: "70px", height: "42px" }}
+      src="assets/googleauth/verifiedlogo.png"
+      alt="Google Auth Verified"
+    />
+  ) : (
+    user.dob
+  )}
+</td>
+
                 <td>
                   {user.status === 'blocked' ? (
                     <button

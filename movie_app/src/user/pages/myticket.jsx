@@ -16,7 +16,7 @@ function Myticket() {
     time,
     bookingDate,
     bookingStatus,
-    razorpayOrderID,
+    //razorpayOrderID,
     paymentID,
     selectedSeats,
   } = location.state;

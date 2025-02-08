@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import UserNavBar from "../usernavbar/usernavbar";
 import Footer from "../../footer/footer";
 import GoBackButton from "../../public/gobackButton";
@@ -22,9 +22,12 @@ function UserBookEvents() {
   const [bookedseats, setbookedseats] = useState("");
 
   useEffect(() => {
+    if (!event_id) return; // Prevent API call if event_id is null or undefined
+  
     const mydata = {
       event_id: event_id,
     };
+  
     axios
       .get(`${baseUrl}/api/fetcheventseats`, {
         params: mydata,
@@ -39,11 +42,13 @@ function UserBookEvents() {
       .catch((error) => {
         console.error(error);
       });
-  }, [selectedSeats]);
+  }, [event_id, selectedSeats]); // ✅ Added event_id to the dependency array
 
   const [ticketAvailability, setTicketAvailability] = useState(null);
 
   useEffect(() => {
+    if (!event_id) return; // Prevent API call if event_id is null or undefined
+  
     const fetchTicketAvailability = () => {
       axios
         .get(`${baseUrl}/api/ticket_availability/${event_id}`)
@@ -55,14 +60,10 @@ function UserBookEvents() {
           console.error("Error fetching ticket availability:", error);
         });
     };
-
+  
     fetchTicketAvailability();
-
-    // Cleanup function (optional)
-    return () => {
-      // Any cleanup code if needed
-    };
-  }, [selectedSeats]);
+  }, [event_id, selectedSeats]); // ✅ Added event_id to the dependency array
+  
 
   const [totalPrice, settotalPrice] = useState(seatPrice);
   const totalPrice2 = selectedSeats.length * seatPrice;
@@ -375,8 +376,8 @@ function UserBookEvents() {
                 <>
                   <p>Tickets available: {ticketAvailability}</p>
                   <p className="card-text">
-                    By booking tickets, you agree to our{" "}
-                    <a href="">Privacy Policy</a>.
+                   By booking tickets, you agree to our{" "}
+                 <a href="/privacy-policy">Privacy Policy</a>.
                   </p>
                   {ticketAvailability !== null && ticketAvailability > 0 ? (
                     <button

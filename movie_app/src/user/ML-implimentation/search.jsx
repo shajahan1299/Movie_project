@@ -1,7 +1,7 @@
 import UserNavBar from "../usernavbar/usernavbar";
 import Footer from "../../footer/footer";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 function SearchMovies() {
   const [searchTerm, setSearchTerm] = useState("");

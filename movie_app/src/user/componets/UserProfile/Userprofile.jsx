@@ -65,17 +65,18 @@ function UserProfile() {
           <div className="card user-profile-card">
             <div className="card-body">
               <div className="user-avatar text-center">
-                <img
-                  src={
-                    profilepicture === "false"
-                      ? "assets/images/faces/4.jpg"
-                      : logintype === "googleauth"
-                      ? profilepicture
-                      : `${baseUrl}/profile_picture/${profilepicture}`
-                  }
-                  alt="Profile Picture"
-                  className="img-fluid rounded-circle profile-picture"
-                />
+              <img
+  src={
+    profilepicture === "false"
+      ? "assets/images/faces/4.jpg"
+      : logintype === "googleauth"
+      ? profilepicture
+      : `${baseUrl}/profile_picture/${profilepicture}`
+  }
+  alt="User profile"
+  className="img-fluid rounded-circle profile-picture"
+/>
+
 
                 {logintype !== "googleauth" && (
                   <div className="mt-3">
@@ -161,10 +162,11 @@ function UserProfile() {
                         Change Password Not Available
                       </i>
                       <img
-                        style={{ width: "37px", height: "22px" }}
-                        src="assets/googleauth/verifiedlogo.png"
-                        alt="Google Auth Image"
-                      />
+  style={{ width: "37px", height: "22px" }}
+  src="assets/googleauth/verifiedlogo.png"
+  alt="Google Auth Verified Logo"
+/>
+
                     </>
                   ) : (
                     <Link to="/changepassword">

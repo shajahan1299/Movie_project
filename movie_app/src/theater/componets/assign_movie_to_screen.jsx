@@ -47,6 +47,8 @@ function AssignMovieToScreen(props) {
   };
 
   useEffect(() => {
+    if (!screenid) return; // Prevent running the effect if screenid is undefined/null
+  
     axios.get(`${baseUrl}/api/getshowtime/${screenid}`)
       .then((response) => {
         if (response.data) {
@@ -61,18 +63,18 @@ function AssignMovieToScreen(props) {
       .catch((error) => {
         console.error(error);
       });
-
+  
     axios.post(`${baseUrl}/api/assignmovie/current`, { screen_id: screenid })
       .then((response) => {
         if (response.data) {
           setCurrentMovies(response.data);
-          console.log(response.data)
+          console.log(response.data);
         }
       })
       .catch((error) => {
         console.error("Error fetching current movies:", error);
       });
-
+  
     axios.get(`${baseUrl}/api/getmovies`)
       .then((response) => {
         setMovies(response.data);
@@ -80,8 +82,9 @@ function AssignMovieToScreen(props) {
       .catch((error) => {
         console.error("Error fetching movies:", error);
       });
-  }, [refresh]);
-
+    
+  }, [screenid, refresh]); 
+  
   const handleDelete = (showtimeId) => {
     axios
       .delete(`${baseUrl}/api/assignmovie/delete/${showtimeId}`)

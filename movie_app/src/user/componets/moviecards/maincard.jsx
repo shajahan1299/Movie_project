@@ -21,16 +21,16 @@ function  Maincard(props) {
   <div className="movie-card">
     <div className="movie-header" style={backgroundImage}>
       <div className="header-icon-container">
-        <a href="#">
+        <a href="/makebooking">
           <i className="material-icons header-icon"></i>
         </a>
       </div>
     </div>{/*movie-header*/}
     <div className="movie-content">
       <div className="movie-content-header">
-        <a href="#">
-          <h3 className="movie-title">{props.title}</h3>
-        </a>
+      <Link to={`/movie/${props.id}`}>
+        <h3 className="movie-title">{props.title}</h3>
+       </Link>
         <div className="imax-logo" />
       </div>
       <div className="movie-info">

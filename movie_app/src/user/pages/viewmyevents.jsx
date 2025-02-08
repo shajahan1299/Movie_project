@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import UserNavBar from "../usernavbar/usernavbar";
 import Footer from "../../footer/footer";
 import GoBackButton from "../../public/gobackButton";
@@ -17,12 +17,12 @@ function ViewMyEvents() {
     event_date,
     event_time,
     ticket_price,
-    organizer,
+    //organizer,
     description,
     ticket_availability,
     seat_arrangement,
     poster_url,
-    status,
+    //status,
     rows,
     cols,
     hostname,

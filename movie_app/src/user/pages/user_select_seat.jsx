@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../config/config";
 import { useSelector } from "react-redux";
@@ -14,10 +14,11 @@ function UserSelectSeat() {
   const screen_id = location.state.screen_id;
   const userId = localStorage.getItem("userId");
   const date = location.state.date;
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const trid = location.state.theater_id;
 
-  const [theatre, settheatre] = useState([]);
+  //const [theatre, settheatre] = useState([]);
+  const [ settheatre] = useState([]);
   const [rows, setrows] = useState(6);
   const [columns, setcolumns] = useState(6);
   const [myorientation, setmyorientation] = useState("");
@@ -28,43 +29,48 @@ function UserSelectSeat() {
   // Calculate the total price based on the number of selected seats
   const totalPrice = selectedSeats.length * seatPrice;
 
-  useEffect(() => {
-    axios
-      .get(`${baseUrl}/api/getmytheatre-user/${time_id}`)
-      .then((response) => {
-        console.log(response.data);
-        setrows(response.data.rows);
-        setcolumns(response.data.columns);
-        setmyorientation(response.data.orientation);
-        settheatre(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+ useEffect(() => {
+  if (!time_id) return; // Ensure time_id is valid before making the request
 
-  useEffect(() => {
-    const mydata = {
-      theater_id: trid,
-      screen_id: screen_id,
-      show_time_id: time_id,
-      date: date,
-      movie_id:movie_id
-    };
-    axios
-      .get(`${baseUrl}/api/fetchbookedseats`, {
-        params: mydata,
-      })
-      .then((response) => {
-        console.log(response.data);
-        if (response.data) {
-          setbookedseats(response.data.BookedSeats);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [selectedSeats]);
+  axios
+    .get(`${baseUrl}/api/getmytheatre-user/${time_id}`)
+    .then((response) => {
+      console.log(response.data);
+      setrows(response.data.rows);
+      setcolumns(response.data.columns);
+      setmyorientation(response.data.orientation);
+      settheatre(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, [time_id, settheatre]); // ✅ Added necessary dependencies
+
+
+ useEffect(() => {
+  if (!trid || !screen_id || !time_id || !date || !movie_id) return; // Ensure all values are valid
+
+  const mydata = {
+    theater_id: trid,
+    screen_id: screen_id,
+    show_time_id: time_id,
+    date: date,
+    movie_id: movie_id
+  };
+
+  axios
+    .get(`${baseUrl}/api/fetchbookedseats`, { params: mydata })
+    .then((response) => {
+      console.log(response.data);
+      if (response.data) {
+        setbookedseats(response.data.BookedSeats);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, [trid, screen_id, time_id, date, movie_id, selectedSeats]); // ✅ Added necessary dependencies
+
 
   const bookmyshow = (orderId,paymentId,amount) => {
     

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../config/config";
 import GoBackButton from "../../public/gobackButton";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import UserNavBar from "../usernavbar/usernavbar";
 import { toast, Toaster } from "react-hot-toast";
 
 function UserViewFavMovies() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
   const [movies, setMovies] = useState([]);
@@ -61,9 +61,9 @@ function UserViewFavMovies() {
         ) : (
           <div className="row row-cols-1 row-cols-md-5 g-4">
             {movies.map((movie, index) => {
-              const releaseDate = new Date(
-                movie.release_date
-              ).toLocaleDateString();
+              //const releaseDate = new Date(
+             //   movie.release_date
+              //).toLocaleDateString();
 
               return (
                 <div key={index} className="col">

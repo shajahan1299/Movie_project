@@ -3,7 +3,7 @@ import axios from "axios";
 import { GoogleLogin } from "react-google-login";
 import { baseUrl } from "../../config/config";
 import { gapi } from "gapi-script";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import jwt_decode from "jwt-decode";
 import { login } from "../../Redux/user/userSlice";
@@ -48,7 +48,7 @@ function GoogleauthLogin({ onChildData }) {
       const token = response.data.token;
       const decoded = jwt_decode(token);
       console.log("decoded:", decoded);
-      const { username, email, userId,usertype,status } = decoded;
+      const { username, email, userId,usertype } = decoded;
 
       
       localStorage.setItem("profilepicture", imageUrl);

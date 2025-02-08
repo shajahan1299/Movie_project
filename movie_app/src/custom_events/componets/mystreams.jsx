@@ -16,17 +16,18 @@ function MyStreams() {
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    // Fetch data from your API endpoint
+    if (!userId) return; // Ensure userId is available before making the request
+  
     axios
       .get(`${baseUrl}/api/getshortfilms/${userId}`)
       .then((response) => {
-        // Update the shortFilms state with the fetched data
         setShortFilms(response.data.shortFilms);
       })
       .catch((error) => {
         console.error("Error fetching short films:", error);
       });
-  }, []); // Empty dependency array ensures useEffect only runs once after initial render
+  }, [userId]); // Include userId in the dependency array
+  
 
   const handleClickOpen = (film) => {
     setSelectedFilm(film);

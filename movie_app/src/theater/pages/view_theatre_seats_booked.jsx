@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../config/config";
 import { Chart } from "react-google-charts";
@@ -7,7 +7,7 @@ import UserNavBar from "../SideBar/theater_sidebar";
 
 function TSBooked() {
   const location = useLocation();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const movie_id = location.state.movie_id;
   const date = location.state.date;
@@ -17,62 +17,66 @@ function TSBooked() {
   const seatcount = location.state.seatcount;
 
   const [chartData, setChartData] = useState(null);
-  const [theatre, settheatre] = useState([]);
+  const [ settheatre] = useState([]);
   const [rows, setrows] = useState(6);
   const [columns, setcolumns] = useState(6);
   const [myorientation, setmyorientation] = useState("");
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedseats, setbookedseats] = useState("");
-  const seatPrice = 150; // Price per seat
+  //const seatPrice = 250; // Price per seat
 
   // Calculate the total price based on the number of selected seats
-  const totalPrice = selectedSeats.length * seatPrice;
+ //const totalPrice = selectedSeats.length * seatPrice;
 
-  useEffect(() => {
-    axios
-      .get(`${baseUrl}/api/getmytheatre-user/${time_id}`)
-      .then((response) => {
-        setrows(response.data.rows);
-        setcolumns(response.data.columns);
-        setmyorientation(response.data.orientation);
-        settheatre(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+ useEffect(() => {
+  axios
+    .get(`${baseUrl}/api/getmytheatre-user/${time_id}`)
+    .then((response) => {
+      setrows(response.data.rows);
+      setcolumns(response.data.columns);
+      setmyorientation(response.data.orientation);
+      settheatre(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [time_id]); // ✅ Only 'time_id' is needed
 
-  useEffect(() => {
-    const mydata = {
-      theater_id: trid,
-      screen_id: screen_id,
-      show_time_id: time_id,
-      date: date,
-      movie_id: movie_id,
-    };
-    axios
-      .get(`${baseUrl}/api/fetchbookedseats`, {
-        params: mydata,
-      })
-      .then((response) => {
-        if (response.data) {
-          setbookedseats(response.data.BookedSeats);
-          const bookedSeatsCount = response.data.BookedSeats.split(",").length;
 
-          // Chart data
-          const chartData = [
-            ["Task", "Count"],
-            ["UnBooked", Math.max(0, seatcount - bookedSeatsCount)],
-            ["Booked", Math.min(seatcount, bookedSeatsCount)],
-          ];
+useEffect(() => {
+  const mydata = {
+    theater_id: trid,
+    screen_id: screen_id,
+    show_time_id: time_id,
+    date: date,
+    movie_id: movie_id,
+  };
 
-          setChartData(chartData);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [selectedSeats]);
+  axios
+    .get(`${baseUrl}/api/fetchbookedseats`, {
+      params: mydata,
+    })
+    .then((response) => {
+      if (response.data) {
+        setbookedseats(response.data.BookedSeats);
+        const bookedSeatsCount = response.data.BookedSeats.split(",").length;
+
+        // Chart data
+        const chartData = [
+          ["Task", "Count"],
+          ["UnBooked", Math.max(0, seatcount - bookedSeatsCount)],
+          ["Booked", Math.min(seatcount, bookedSeatsCount)],
+        ];
+
+        setChartData(chartData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, [selectedSeats, date, movie_id, screen_id, seatcount, time_id, trid]); // ✅ Add all dependencies
+
 
   const alphabet = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode(65 + i)

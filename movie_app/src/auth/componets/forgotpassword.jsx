@@ -16,9 +16,8 @@ function ForgotPassword(props) {
   } = useForm({mode: "onChange"});
 
   useEffect(() => {
-
-    setValue('email',props.useremail  || ''); 
-  }, []);
+    setValue('email', props.useremail || '');
+}, [props.useremail, setValue]); 
 
 
   const onSubmit = async (data) => {
@@ -85,81 +84,61 @@ function ForgotPassword(props) {
 
               <br></br>
               <div className="card-body">
-                <form role="form text-left" onSubmit={handleSubmit(onSubmit)}>
+              <form className="text-left" onSubmit={handleSubmit(onSubmit)}>
 
+    {props.useremail ? (
+      <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
+        <input
+          type="email"
+          name="email"
+          {...register("email", validationRules.email)}
+          className={`form-control ${errors.email ? "is-invalid" : ""}`}
+          placeholder="Email"
+          aria-label="Email"
+          aria-describedby="email-addon"
+          disabled={true}
+        />
+      </div>
+    ) : (
+      <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
+        <input
+          type="email"
+          name="email"
+          {...register("email", validationRules.email)}
+          className={`form-control ${errors.email ? "is-invalid" : ""}`}
+          placeholder="Email"
+          aria-label="Email"
+          aria-describedby="email-addon"
+        />
+      </div>
+    )}
 
+    <p className="text-danger">{errors?.email && errors.email.message}</p>
 
-                  {props.useremail ? 
-                  <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
-                  <input
-                    
-                    type="email"
-                   
-                    name="email"
-                    {...register("email", validationRules.email)}
-                    className={`form-control ${
-                      errors.email ? "is-invalid" : ""
-                    }`}
-                    placeholder="Email"
-                    aria-label="Email"
-                    aria-describedby="email-addon"
-                    disabled={true}
+    <div className="text-center">
+      {isLoading ? (
+        <button className="attractive-button btn-block btn-lg shadow-lg mt-5">
+          <div className="spinner-border text-light" aria-hidden="true"></div>
+          <span className="sr-only">Sending OTP...</span>
+        </button>
+      ) : (
+        <button
+          type="submit"
+          className="attractive-button btn-block btn-lg shadow-lg mt-5"
+        >
+          Send Email
+        </button>
+      )}
+    </div>
 
-                  />
-                </div>
-                  
-                  :<div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
-                    <input
-                      type="email"
-                      name="email"
-                      {...register("email", validationRules.email)}
-                      className={`form-control ${
-                        errors.email ? "is-invalid" : ""
-                      }`}
-                      placeholder="Email"
-                      aria-label="Email"
-                      aria-describedby="email-addon"
-                    />
-                  </div>}
-                  
-
-                  <p className="text-danger">
-                    {" "}
-                    {errors?.email && errors.email.message}
-                  </p>
-
-                  <div className="text-center">
-                    {isLoading ? ( // Conditionally render the spinner when isLoading is true
-                       <button
-                       
-                       className="attractive-button btn-block btn-lg shadow-lg mt-5"
-                     >
-                       <div class="spinner-border text-light" role="status">
-  <span class="sr-only">Sending OTP...</span>
+    {!props.title && (
+      <p className="text-sm mt-3 mb-0">
+        Already have an account? <Link to="/" className="font-bold">Login</Link>
+      </p>
+    )}
+  </form>
 </div>
-                     </button>
-                    ) : (
-                      <button
-                        type="submit"
-                        className="attractive-button btn-block btn-lg shadow-lg mt-5"
-                      >
-                        Send Email
-                      </button>
-                    )}
-                  </div>
-                  {props.title ? '' :
-                  
-                  <p className="text-sm mt-3 mb-0">
-                  Already have an account?
-                  <Link to="/">
-                    <a className="font-bold">Login</a>
-                  </Link>
-                </p>
-                  
-                  }
-                
-                </form>
-              </div>
+
             </div>
           </div>
         </div>

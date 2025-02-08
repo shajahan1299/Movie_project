@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import "./public/seat.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateSeatOrientation from "./theater/theater_orientation";
@@ -21,7 +20,6 @@ import UserHomePage2 from "./user/pages/user_home_page2";
 import AdminViewTheatersPage from "./admin/pages/admin_view_theaters_page";
 import AdminApproveTheaterPage from "./admin/pages/admin_approve_theater_page";
 import RequestRejected from "./auth/pages/requestrejected";
-import React, { useState, useEffect } from "react";
 import Error404 from "./errorpage/error404";
 import { useSelector } from "react-redux";
 import UserProfilePage from "./user/pages/user_profilepage";

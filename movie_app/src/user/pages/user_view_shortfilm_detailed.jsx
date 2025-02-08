@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Footer from "../../footer/footer";
 import UserNavBar from "../usernavbar/usernavbar";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,64 +10,59 @@ function UserMyFilm() {
     const navigate = useNavigate();
     const location = useLocation();
     const movieData = location.state ? location.state.movie : null;
-    const releaseDate = movieData ? new Date(movieData.release_date) : null;
+
+    // ✅ Use useMemo to prevent unnecessary recalculations of releaseDate
+    const releaseDate = useMemo(() => {
+        return movieData ? new Date(movieData.release_date) : null;
+    }, [movieData]);
+
     const isReleased = releaseDate && releaseDate <= new Date();
-    const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining());
 
-  function getTimeRemaining() {
-    const now = new Date();
-    const difference = releaseDate - now;
+    // ✅ Wrap getTimeRemaining in useCallback to prevent re-creation
+    const getTimeRemaining = useCallback(() => {
+        const now = new Date();
+        const difference = releaseDate - now;
 
-    if (difference <= 0) {
-      return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      };
-    }
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    return {
-      days,
-      hours,
-      minutes,
-      seconds,
-    };
-  }
-
-  useEffect(() => {
-    if (!isReleased) {
-      const timerId = setInterval(() => {
-        setTimeRemaining(getTimeRemaining());
-      }, 1000);
-
-      // Clear the interval when the component is unmounted
-      return () => clearInterval(timerId);
-    }
-  }, [isReleased]);
-
-
-  const [subscriptionPlan, setSubscriptionPlan] = useState('basic');
-  const userId = localStorage.getItem("userId");
-  useEffect(() => {
-    const fetchSubscriptionPlan = async () => {
-        try {
-            const response = await axios.get(`${baseUrl}/api/get-my-subscriptions/${userId}`);
-            setSubscriptionPlan(response.data.subscription_plan);
-            console.log(response.data.subscription_plan);
-        } catch (error) {
-            console.error('Error fetching subscription plan:', error);
+        if (difference <= 0) {
+            return { days: 0, hours: 0, minutes: 0, seconds: 0 };
         }
-    };
-    fetchSubscriptionPlan();
-}, []); 
+
+        return {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+            seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        };
+    }, [releaseDate]); // ✅ Stable dependency
+
+    // ✅ Use a function inside useState to initialize properly
+    const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining);
+
+    useEffect(() => {
+        if (!isReleased) {
+            const timerId = setInterval(() => {
+                setTimeRemaining(getTimeRemaining());
+            }, 1000);
+
+            return () => clearInterval(timerId);
+        }
+    }, [isReleased, getTimeRemaining]); // ✅ Fixed dependencies
+
+    const [subscriptionPlan, setSubscriptionPlan] = useState("basic");
+    const userId = localStorage.getItem("userId");
+
+    useEffect(() => {
+        const fetchSubscriptionPlan = async () => {
+            try {
+                const response = await axios.get(`${baseUrl}/api/get-my-subscriptions/${userId}`);
+                setSubscriptionPlan(response.data.subscription_plan);
+                console.log(response.data.subscription_plan);
+            } catch (error) {
+                console.error("Error fetching subscription plan:", error);
+            }
+        };
+        if (userId) fetchSubscriptionPlan(); // Ensure userId exists before making the request
+    }, [userId]); // ✅ Added userId as dependency
 
 
 

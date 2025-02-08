@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, Toaster } from 'react-hot-toast';
@@ -145,85 +145,71 @@ function Login() {
               </div>
               <br></br>
               <div className="card-body">
-                <form role="form text-left" onSubmit={handleSubmit(onSubmit)}>
-                  <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
-                    <input
-                    
-                      type="email"
-                      name="email"
-                      {...register("email", validationRules.email)}
-                      className={`form-control ${
-                        errors.email ? "is-invalid" : ""
-                      }`}
-                      placeholder="Email"
-                      aria-label="Email"
-                      aria-describedby="email-addon"
-                    />
-                  </div>
+              <form className="text-left" onSubmit={handleSubmit(onSubmit)}>
 
-                  <p className="text-danger">
-                    {" "}
-                    {errors?.email && errors.email.message}
-                  </p>
-                  <div className="mb-3">
-                    <input
-                      type="password"
-                      name="password"
-                      {...register("password", validationRules.password)}
-                      className={`form-control ${
-                        errors.password ? "is-invalid" : ""
-                      }`}
-                      placeholder="Password"
-                      aria-label="Password"
-                      aria-describedby="password-addon"
-                    />
-                  </div>
-                  <p className="text-danger">
-                    {" "}
-                    {errors?.password && errors.password.message}
-                  </p>
+    <div className={`mb-3 ${errors.email ? "has-danger" : ""}`}>
+      <input
+        type="email"
+        name="email"
+        {...register("email", validationRules.email)}
+        className={`form-control ${errors.email ? "is-invalid" : ""}`}
+        placeholder="Email"
+        aria-label="Email"
+        aria-describedby="email-addon"
+      />
+    </div>
 
-                  {/* <div className="form-check form-check-info text-left">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      defaultValue
-                      id="flexCheckDefault"
-                      defaultChecked
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexCheckDefault"
-                    >
-                      Keep me{" "}
-                      <a className="text-dark font-weight-bolder">Logged in</a>
-                    </label>
-                  </div> */}
+    <p className="text-danger">{errors?.email && errors.email.message}</p>
 
-                  <div className="text-center">
-                    <button
-                      id="testid"
-                      type="submit"
+    <div className="mb-3">
+      <input
+        type="password"
+        name="password"
+        {...register("password", validationRules.password)}
+        className={`form-control ${errors.password ? "is-invalid" : ""}`}
+        placeholder="Password"
+        aria-label="Password"
+        aria-describedby="password-addon"
+      />
+    </div>
 
-                      className="attractive-button btn-block btn-lg shadow-lg mt-5"
-                    >
-                      Login
-                    </button>
-                  </div>
+    <p className="text-danger">{errors?.password && errors.password.message}</p>
 
-                  <p className="text-sm mt-3 mb-0">
-                    Already have an account?
-                    <Link to="/register">
-                      <a className="font-bold">Sign in</a>
-                    </Link>
-                  </p>
-                  <p>
-                    <Link to="/forgotpwd">
-                      <a className="font-bold">Forgot password?</a>
-                    </Link>
-                  </p>
-                </form>
-              </div>
+    {/* Uncomment and fix accessibility if needed */}
+    {/* <div className="form-check form-check-info text-left">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="flexCheckDefault"
+        defaultChecked
+      />
+      <label className="form-check-label" htmlFor="flexCheckDefault">
+        Keep me{" "}
+        <span className="text-dark font-weight-bolder">Logged in</span>
+      </label>
+    </div> */}
+
+    <div className="text-center">
+      <button
+        id="testid"
+        type="submit"
+        className="attractive-button btn-block btn-lg shadow-lg mt-5"
+      >
+        Login
+      </button>
+    </div>
+
+    <p className="text-sm mt-3 mb-0">
+      Already have an account?{" "}
+      <Link to="/register" className="font-bold">Sign in</Link>
+    </p>
+
+    <p>
+      <Link to="/forgotpwd" className="font-bold">Forgot password?</Link>
+    </p>
+  </form>
+</div>
+
             </div>
           </div>
         </div>

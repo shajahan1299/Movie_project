@@ -131,11 +131,15 @@ function CommentBox(props) {
                             <div className="card mb-2" key={commentData.commentId}>
                                 <div className="card-body">
                                     <div className="avatar avatar-md">
-                                        <img
-                                            src={ commentData.userId.profile_picture ===undefined? 'assets/images/faces/4.jpg':`${baseUrl}/profile_picture/${commentData.userId.profile_picture}`}
-                                            alt="Profile Picture"
-                                            className="rounded-circle"
-                                        />
+                                    <img
+                                    src={
+                                    commentData.userId.profile_picture === undefined
+                                      ? "assets/images/faces/4.jpg"
+                                      : `${baseUrl}/profile_picture/${commentData.userId.profile_picture}`
+                                    }
+                                     alt={commentData.userId.name ? `${commentData.userId.name}` : "User profile"}
+                                     className="rounded-circle"
+                                      />
                                         <div style={{ marginLeft: "20px", textAlign: "left" }}>
                                             <h6 className="card-title">{commentData.userId.username}</h6>
                                             <p className="card-text">{commentData.comment}</p>

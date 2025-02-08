@@ -104,11 +104,9 @@ function Homecards() {
                                                 <div class="card-body">
                                                     <h5 class="card-title"> View Screens</h5>
                                                     <p class="card-text">Click to  View Screens.</p>
-                                                    <Link to="/viewmyscreens">
-                                                    <a  class="btn btn-primary">
-                                                        View Screens
-                                                    </a>
-                                                    </Link>
+                                                    <Link to="/viewmyscreens" className="btn btn-primary">
+  View Screens
+</Link>
                                                 </div>
                                             </div>
                                         </div>

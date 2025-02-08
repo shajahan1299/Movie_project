@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import { baseUrl } from '../../config/config';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast} from 'react-hot-toast';
 import GoBackButton from '../../public/gobackButton';
 
 function AdminViewHost() {
 
 
   
-  const [blockReason, setBlockReason] = useState('');
+  const [blockReason] = useState('');
 
   const hostsPerPage = 15;
   const [hosts, setHosts] = useState([]);

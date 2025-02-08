@@ -6,7 +6,8 @@ import GoBackButton from '../../public/gobackButton';
 
 function WatchMovies() {
   const location = useLocation();
-  const { movie_id, movieName, language } = location.state;
+  //const { movie_id, movieName, language } = location.state;
+  const {  movieName, language } = location.state;
   console.log(location.state)
   const movie_url = location.state.movie_url
   const [loading, setLoading] = useState(true);

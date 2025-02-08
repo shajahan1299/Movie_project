@@ -17,7 +17,7 @@ function AddScreen() {
     const [rows, setRows] = useState('10');
     const [columns, setColumns] = useState('15');
     const [unavailableseats, setunavailableseats] = useState([]);
-    const [selectedSeats, setSelectedSeats] = useState([]);
+    const [selectedSeats] = useState([]);
 
 
     const type = "A/C";
@@ -60,7 +60,7 @@ function AddScreen() {
         }).then((result) => {
             console.log(result);
 
-            if (result.data.Status == 'S') {
+            if (result.data.Status === 'S') {
 
                 console.log("Success");
                 alert("Screen Added");

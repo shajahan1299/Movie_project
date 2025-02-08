@@ -3,7 +3,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { baseUrl } from "../config/config";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import GoBackButton from '../public/gobackButton';
 
 
@@ -73,7 +73,7 @@ function CreateSeatOrientation() {
     const [rows, setRows] = useState(5);
     const [columns, setColumns] = useState(10);
     const [unavailableseats, setunavailableseats] = useState([]);
-    const [selectedSeats, setSelectedSeats] = useState([]);
+    const [selectedSeats] = useState([]);
 
     const handleClick = (seatNumber) => {
 

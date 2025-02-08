@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../config/config";
 
@@ -25,7 +25,7 @@ function UpdateEvent() {
   const [unavailableseats, setunavailableseats] = useState(
     location.state.seat_arrangement
   );
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedSeats] = useState([]);
 
   const handleClick = (seatNumber) => {
     //console.log(unavailableseats);

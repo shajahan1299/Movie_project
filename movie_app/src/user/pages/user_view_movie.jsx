@@ -56,6 +56,8 @@ function UserViewMovie() {
   const [subscriptionPlan, setSubscriptionPlan] = useState('basic');
   const userId = localStorage.getItem("userId");
   useEffect(() => {
+    if (!userId) return; // Prevents fetching if userId is not available
+
     const fetchSubscriptionPlan = async () => {
         try {
             const response = await axios.get(`${baseUrl}/api/get-my-subscriptions/${userId}`);
@@ -65,8 +67,10 @@ function UserViewMovie() {
             console.error('Error fetching subscription plan:', error);
         }
     };
+
     fetchSubscriptionPlan();
-}, []); 
+}, [userId]); // ✅ Added 'userId' to dependency array
+ 
 
 
   return (

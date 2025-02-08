@@ -8,8 +8,8 @@ function AdminViewPostedMovies() {
   const navigate = useNavigate();
 
   const [movies, setMovies] = useState([]);
-  const [rf, setrf] = useState(true);
-
+ // const [rf, setrf] = useState(true);
+ const [rf] = useState(true);
   useEffect(() => {
     axios
       .get(`${baseUrl}/api/getmovies`)
@@ -21,25 +21,24 @@ function AdminViewPostedMovies() {
       });
   }, [rf]);
 
-  const deleteMovie = (movieId) => {
-  console.log(movieId);
-    const apiUrl = `http://localhost:5000/api/movies/${movieId}`;
+  //const deleteMovie = async (movieId) => {
+  //console.log(movieId);
+    //const apiUrl = `http://localhost:5000/api/movies/${movieId}`;
 
-    return axios
-      .delete(apiUrl)
-      .then((response) => {
-        alert(response.data.message);
-        console.log("Movie deleted successfully:", response);
-        setrf(false);
-        setrf(true);
-        return response.data; // You can return the response data or a success message
-      })
-      .catch((error) => {
-        alert("Error deleting movie:");
-        console.error("Error deleting movie:", error);
-        throw error; // You can throw the error to handle it in the calling code
-      });
-  };
+    //try {
+     // const response = await axios
+     //   .delete(apiUrl);
+     // alert(response.data.message);
+    //  console.log("Movie deleted successfully:", response);
+    //  setrf(false);
+    //  setrf(true);
+   //   return response.data;
+   // } catch (error) {
+   //   alert("Error deleting movie:");
+    //  console.error("Error deleting movie:", error);
+    //  throw error; // You can throw the error to handle it in the calling code
+  //  }
+ // };
 
 
 

@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { baseUrl } from "../../config/config";
 import UserNavBar from "../usernavbar/usernavbar";
 import Footer from "../../footer/footer";
-import { Card, Button, Row, Col } from "react-bootstrap";
-import Maincard from "../componets/moviecards/maincard";
+import { Card, Row, Col } from "react-bootstrap";
+//import Maincard from "../componets/moviecards/maincard";
 import axios from "axios";
 import CommentBox from "./commetbox";
 import LikeDislikeButton from "../componets/like-dislike-button";
@@ -87,46 +87,47 @@ function UserPlayer() {
                     .slice(0, 4)
                     .map((movie, index) => {
                       if (movie.shortfilm_title === mytitle) {
-                        return null; // Skip this iteration
+                        return null; // ✅ Skip this iteration
                       }
-
+                    
                       const data = { movie };
                       const releaseDate = new Date(movie.release_date);
-                      if (releaseDate < today) {
-                        return (
-                          <Col
-                            key={index}
-                            md={3}
-                            className="mb-4"
-                            onClick={() => {
-                              navigate("/filmview", { state: data });
-                            }}
-                          >
-                            <Card>
-                              <Card.Img
-                                variant="top"
-                                src={`${baseUrl}/film_poster/${movie.poster_url}`}
-                                alt={movie.title}
-                                style={{
-                                  borderRadius: "10px",
-                                  height: "300px",
-                                  width: "90%",
-                                }}
-                              />
-                              <Card.Body>
-                                <h5 className="card-title">
-                                  {movie.shortfilm_title}
-                                </h5>
-                                <p className="card-text">
-                                  <strong>Genre:</strong> {movie.genre}
-                                  {releaseDate.toLocaleDateString()}
-                                </p>
-                              </Card.Body>
-                            </Card>
-                          </Col>
-                        );
+                    
+                      if (releaseDate >= today) {
+                        return null; // ✅ Always return something (null in this case)
                       }
+                    
+                      return (
+                        <Col
+                          key={index}
+                          md={3}
+                          className="mb-4"
+                          onClick={() => {
+                            navigate("/filmview", { state: data });
+                          }}
+                        >
+                          <Card>
+                            <Card.Img
+                              variant="top"
+                              src={`${baseUrl}/film_poster/${movie.poster_url}`}
+                              alt={movie.title}
+                              style={{
+                                borderRadius: "10px",
+                                height: "300px",
+                                width: "90%",
+                              }}
+                            />
+                            <Card.Body>
+                              <h5 className="card-title">{movie.shortfilm_title}</h5>
+                              <p className="card-text">
+                                <strong>Genre:</strong> {movie.genre} {releaseDate.toLocaleDateString()}
+                              </p>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      );
                     })}
+                    
                 </Row>
               </Card.Body>
             </Card>

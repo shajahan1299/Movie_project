@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import UserCarousel from "../componets/Carousel/user_carousel";
 import "./../componets/moviecards/sample.css";
 import ShortFilmCard from "../componets/Shortfimcard";
+import { useMemo } from "react";
 
 function UserHomePage2() {
   const isLoggedInlocal = localStorage.getItem("isLoggedIn");
@@ -114,12 +115,11 @@ function UserHomePage2() {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [
+  const images = useMemo(() => [
     "assets/explore/a1.jpg",
-    "assets/explore/a2.jpg", // Add more image URLs as needed
+    "assets/explore/a2.jpg",
     "assets/explore/a3.jpg",
-  ];
-
+  ], []);
   useEffect(() => {
     const interval = setInterval(() => {
       const nextImageIndex = (currentImageIndex + 1) % images.length;
@@ -241,7 +241,7 @@ function UserHomePage2() {
                         cast: movie.cast,
                         trailer_url: movie.trailer_url,
                         StreamingType: movie.StreamingType,
-                        trailer_url: movie.trailer_url,
+        
                       };
 
                       return (
@@ -314,81 +314,82 @@ function UserHomePage2() {
             <section className="mt-5">
               <h2>Now In Theaters</h2>
               <div className="row">
-                {movies.map((movie) => {
-                  const data = {
-                    movie_id: movie._id,
-                    poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
-                    title: movie.title,
-                    genre: movie.genre,
-                    duration: movie.duration,
-                    release_date: movie.release_date,
-                    director: movie.director,
-                    language: movie.language,
-                    description: movie.description,
-                    production: movie.production,
-                    cast: movie.cast,
-                    trailer_url: movie.trailer_url,
-                    StreamingType: movie.StreamingType,
-                  };
-                  if (movie.StreamingType === "In-Theaters") {
-                    return (
-                      <div
-                        className="col-lg-2 col-md-4 col-6 mb-4"
-                        onClick={() => {
-                          navigate("/viewmovie", {
-                            state: data,
-                          });
-                        }}
-                        key={movie.id}
-                      >
-                        <div
-                          className="card"
-                          style={{
-                            transition: "transform 0.2s",
-                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                            overflow: "hidden",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = "scale(1.05)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = "scale(1)";
-                          }}
-                        >
-                          <div
-                            className="card-img-container"
-                            style={{
-                              position: "relative",
-                              width: "100%",
-                              height: "0",
-                              paddingTop: "150%",
-                            }}
-                          >
-                            <img
-                              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
-                              className="card-img-top movie-poster"
-                              alt={movie.title}
-                              style={{
-                                width: "100%",
-                                height: "100%",
-                                position: "absolute",
-                                top: "0",
-                                left: "0",
-                                transition: "transform 0.2s",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = "scale(1.1)";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = "scale(1)";
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-                })}
+              {movies.map((movie) => {
+  if (movie.StreamingType === "In-Theaters") {
+    const data = {
+      movie_id: movie._id,
+      poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
+      title: movie.title,
+      genre: movie.genre,
+      duration: movie.duration,
+      release_date: movie.release_date,
+      director: movie.director,
+      language: movie.language,
+      description: movie.description,
+      production: movie.production,
+      cast: movie.cast,
+      trailer_url: movie.trailer_url,
+      StreamingType: movie.StreamingType,
+    };
+
+    return (
+      <div
+        className="col-lg-2 col-md-4 col-6 mb-4"
+        onClick={() => {
+          navigate("/viewmovie", { state: data });
+        }}
+        key={movie.id}
+      >
+        <div
+          className="card"
+          style={{
+            transition: "transform 0.2s",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            overflow: "hidden",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.05)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+        >
+          <div
+            className="card-img-container"
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "0",
+              paddingTop: "150%",
+            }}
+          >
+            <img
+              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+              className="card-img-top movie-poster"
+              alt={movie.title}
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                top: "0",
+                left: "0",
+                transition: "transform 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null; // ✅ This ensures every case returns something
+})}
               </div>
             </section>
           </div>
@@ -399,82 +400,85 @@ function UserHomePage2() {
             <section className="mt-5">
               <h2>New OTT release</h2>
               <div className="row">
-                {movies.map((movie) => {
-                  const data = {
-                    movie_id: movie._id,
-                    poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
-                    title: movie.title,
-                    genre: movie.genre,
-                    duration: movie.duration,
-                    release_date: movie.release_date,
-                    director: movie.director,
-                    language: movie.language,
-                    description: movie.description,
-                    production: movie.production,
-                    cast: movie.cast,
-                    trailer_url: movie.trailer_url,
-                    StreamingType: movie.StreamingType,
-                    movie_url:movie.movie_url
-                  };
-                  if (movie.StreamingType === "OTT-Release") {
-                    return (
-                      <div
-                        className="col-lg-2 col-md-4 col-6 mb-4"
-                        onClick={() => {
-                          navigate("/viewmovie", {
-                            state: data,
-                          });
-                        }}
-                        key={movie.id}
-                      >
-                        <div
-                          className="card"
-                          style={{
-                            transition: "transform 0.2s",
-                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                            overflow: "hidden",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = "scale(1.05)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = "scale(1)";
-                          }}
-                        >
-                          <div
-                            className="card-img-container"
-                            style={{
-                              position: "relative",
-                              width: "100%",
-                              height: "0",
-                              paddingTop: "150%",
-                            }}
-                          >
-                            <img
-                              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
-                              className="card-img-top movie-poster"
-                              alt={movie.title}
-                              style={{
-                                width: "100%",
-                                height: "100%",
-                                position: "absolute",
-                                top: "0",
-                                left: "0",
-                                transition: "transform 0.2s",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = "scale(1.1)";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = "scale(1)";
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-                })}
+              {movies.map((movie) => {
+  const data = {
+    movie_id: movie._id,
+    poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
+    title: movie.title,
+    genre: movie.genre,
+    duration: movie.duration,
+    release_date: movie.release_date,
+    director: movie.director,
+    language: movie.language,
+    description: movie.description,
+    production: movie.production,
+    cast: movie.cast,
+    trailer_url: movie.trailer_url,
+    StreamingType: movie.StreamingType,
+    movie_url: movie.movie_url,
+  };
+
+  if (movie.StreamingType === "OTT-Release") {
+    return (
+      <div
+        className="col-lg-2 col-md-4 col-6 mb-4"
+        onClick={() => {
+          navigate("/viewmovie", {
+            state: data,
+          });
+        }}
+        key={movie._id} // ✅ Ensure key uses `_id` instead of `id`
+      >
+        <div
+          className="card"
+          style={{
+            transition: "transform 0.2s",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            overflow: "hidden",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.05)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+        >
+          <div
+            className="card-img-container"
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "0",
+              paddingTop: "150%",
+            }}
+          >
+            <img
+              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+              className="card-img-top movie-poster"
+              alt={movie.title}
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                top: "0",
+                left: "0",
+                transition: "transform 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null; // ✅ Always return something (null) for non-matching cases
+})}
               </div>
             </section>
           </div>
@@ -486,59 +490,54 @@ function UserHomePage2() {
             <section className="mt-5">
               <h2>OutDoor Events</h2>
               <div className="row">
-                {events.map((eventData) => {
-                  const data = {
-                    event_id: eventData._id,
-                    event_name: eventData.event_name,
-                    event_type: eventData.event_type,
-                    eventlocation: eventData.location,
-                    event_date: eventData.event_date,
-                    event_time: eventData.event_time,
-                    ticket_price: eventData.ticket_price,
-                    organizer: eventData.organizer,
-                    description: eventData.description,
-                    ticket_availability: eventData.ticket_availability,
-                    seat_arrangement: eventData.seat_arrangement,
-                    poster_url: eventData.poster_url,
-                    status: eventData.status,
-                    rows: eventData.rows,
-                    cols: eventData.cols,
-                    hostname: eventData.userId.hostname,
-                    contactNumber: eventData.userId.contactNumber,
-                    hostemail: eventData.userId.email,
-                  };
-                  if (eventData.event_name) {
-                    return (
-                      <div
-                        className="col-lg-2 col-md-4 col-6 mb-4"
-                        onClick={() => {
-                          navigate("/view-events", {
-                            state: data,
-                          });
-                        }}
-                        key={eventData.id}
-                      >
-                        <div
-                          className="card"
-                          style={{ height: "400px", overflow: "hidden" }}
-                        >
-                          <img
-                            src={`http://localhost:5000/event_poster/${eventData.poster_url}`}
-                            className="card-img-top"
-                            alt={eventData.event_name}
-                            style={{ objectFit: "cover", height: "100%" }}
-                          />
-                          <div className="card-body">
-                            <h5 className="card-title">
-                              {eventData.event_name}
-                            </h5>
-                            <p className="card-text">{eventData.event_type}</p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-                })}
+              {events.map((eventData) => {
+  const data = {
+    event_id: eventData._id,
+    event_name: eventData.event_name,
+    event_type: eventData.event_type,
+    eventlocation: eventData.location,
+    event_date: eventData.event_date,
+    event_time: eventData.event_time,
+    ticket_price: eventData.ticket_price,
+    organizer: eventData.organizer,
+    description: eventData.description,
+    ticket_availability: eventData.ticket_availability,
+    seat_arrangement: eventData.seat_arrangement,
+    poster_url: eventData.poster_url,
+    status: eventData.status,
+    rows: eventData.rows,
+    cols: eventData.cols,
+    hostname: eventData.userId.hostname,
+    contactNumber: eventData.userId.contactNumber,
+    hostemail: eventData.userId.email,
+  };
+
+  if (!eventData.event_name) return null; // ✅ Always return something for all cases
+
+  return (
+    <div
+      className="col-lg-2 col-md-4 col-6 mb-4"
+      onClick={() => {
+        navigate("/view-events", { state: data });
+      }}
+      key={eventData._id} // ✅ Using `_id` instead of `id` to avoid undefined keys
+    >
+      <div className="card" style={{ height: "400px", overflow: "hidden" }}>
+        <img
+          src={`http://localhost:5000/event_poster/${eventData.poster_url}`}
+          className="card-img-top"
+          alt={eventData.event_name}
+          style={{ objectFit: "cover", height: "100%" }}
+        />
+        <div className="card-body">
+          <h5 className="card-title">{eventData.event_name}</h5>
+          <p className="card-text">{eventData.event_type}</p>
+        </div>
+      </div>
+    </div>
+  );
+})}
+
               </div>
             </section>
           </div>

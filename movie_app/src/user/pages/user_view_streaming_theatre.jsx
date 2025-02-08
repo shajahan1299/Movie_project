@@ -33,17 +33,18 @@ const [selectedDate, setSelectedDate] = useState(next5Days[0]);
 // You can also use setSelectedDate(next5Days[0].toISOString().split("T")[0]); if needed
 
 
-  useEffect(() => {
-    axios
+useEffect(() => {
+  axios
       .get(`${baseUrl}/api/getshowtime-user/${movie_id}`)
       .then((response) => {
-        setShowtimes(response.data);
-        console.log(response.data)
+          setShowtimes(response.data);
+          console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
+          console.error(error);
       });
-  }, []);
+}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   // Organize showtimes by theater and screen_name
   const showtimesByTheaterAndScreen = {};

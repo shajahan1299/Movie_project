@@ -116,13 +116,11 @@ function AdminHome() {
                                         </div>
                                         <div class="col-md-3">
                                             <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">View Movies</h5>
-                                                    <p class="card-text">View Posted Movies</p>
-                                                    <Link to="/viewpostedmovies">
-                                                    <a id="viewmovies" class="btn btn-primary">View Movie</a>
-                                                    </Link>
-                                                </div>
+                                            <div className="card-body">
+  <h5 className="card-title">View Movies</h5>
+  <p className="card-text">View Posted Movies</p>
+  <Link to="/viewpostedmovies" className="btn btn-primary">View Movies</Link>
+</div>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -139,13 +137,11 @@ function AdminHome() {
                                         </div>
                                         <div class="col-md-3">
                                             <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">View Theater</h5>
-                                                    <p class="card-text">Aprove new Theaters</p>
-                                                    <Link to="/viewtheaters">
-                                                    <a  class="btn btn-primary">View Theater</a>
-                                                    </Link>
-                                                </div>
+                                            <div className="card-body">
+                                             <h5 className="card-title">View Theater</h5>
+                                               <p className="card-text">Approve new Theaters</p>
+                                                <Link to="/viewtheaters" className="btn btn-primary">View Theater</Link>
+                                               </div>
                                             </div>
                                         </div>
                                     </div>

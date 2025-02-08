@@ -15,7 +15,7 @@ function AddNewEvent() {
   const [rows, setRows] = useState(5);
   const [columns, setColumns] = useState(10);
   const [unavailableseats, setunavailableseats] = useState([]);
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedSeats] = useState([]);
 
   const handleClick = (seatNumber) => {
     //console.log(unavailableseats);

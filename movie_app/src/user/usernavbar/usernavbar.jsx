@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MovieIcon from "@mui/icons-material/Movie";
@@ -9,7 +9,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/user/userSlice";
-import LocationPicker from "../componets/LocationPicker";
+//import LocationPicker from "../componets/LocationPicker";
 import { baseUrl } from "../../config/config";
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -116,17 +116,18 @@ function UserNavBar(props) {
                       <p className="mb-0 text-sm text-white-600">{useremail}</p>
                     </div>
                     <div className="avatar avatar-md">
-                      <img
-                        src={
-                          profilepicture === "false"
-                            ? "assets/images/faces/4.jpg"
-                            : logintype === "googleauth"
-                            ? profilepicture
-                            : `${baseUrl}/profile_picture/${profilepicture}`
-                        }
-                        alt="Profile Picture"
-                        className="rounded-circle"
-                      />
+                    <img
+  src={
+    profilepicture === "false"
+      ? "assets/images/faces/4.jpg"
+      : logintype === "googleauth"
+      ? profilepicture
+      : `${baseUrl}/profile_picture/${profilepicture}`
+  }
+  alt="User profile"
+  className="rounded-circle"
+/>
+
                     </div>
                   </div>
                 </Dropdown.Toggle>

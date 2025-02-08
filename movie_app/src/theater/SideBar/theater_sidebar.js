@@ -98,13 +98,13 @@ function TheaterSidebar(props) {
 
                             <li className="sidebar-title">Pages</li>
                             <Link to="/createnewscreen">
-                                <li className={props.newt}>
-                                    <a href="" className="sidebar-link">
-                                        <i className="bi bi-envelope-fill"></i>
-                                        <span>Add New Screen</span>
-                                    </a>
-                                </li>
-                            </Link>
+                         <li className={`${props.newt} sidebar-link`}>
+                          <i className="bi bi-envelope-fill"></i>
+                             <span>Add New Screen</span>
+                                 </li>
+                                 </Link>
+
+
 
                             <Link to="/viewmyscreens">
                                 <li className={props.viewscreenlist}>
