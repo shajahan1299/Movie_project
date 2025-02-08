@@ -148,7 +148,7 @@ const formattedTime = `${hour}:${minute} ${period}`;
           <div className="col-md-4">
             {poster_url && (
               <img
-                src={`http://localhost:5000/event_poster/${poster_url}`}
+                src={`https://movie-backend-1-a9jv.onrender.com/event_poster/${poster_url}`}
                 alt={event_name}
                 className="img-fluid rounded"
                 style={{ height: "400px" }} // Set the maximum height as per your requirement

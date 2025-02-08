@@ -18,7 +18,7 @@ function UserHomePage2() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/getmovies")
+      .get("https://movie-backend-1-a9jv.onrender.com/api/getmovies")
       .then((response) => {
         console.log(response.data);
         setMovies(response.data);
@@ -28,7 +28,7 @@ function UserHomePage2() {
       });
 
     axios
-      .get("http://localhost:5000/api/getallevents")
+      .get("https://movie-backend-1-a9jv.onrender.com/api/getallevents")
       .then((response) => {
         console.log(response.data);
         setEvents(response.data);
@@ -229,7 +229,7 @@ function UserHomePage2() {
                     {filteredMovies.map((movie) => {
                       const data = {
                         movie_id: movie._id,
-                        poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
+                        poster_url: `https://movie-backend-1-a9jv.onrender.com/movie_poster/${movie.poster_url}`,
                         title: movie.title,
                         genre: movie.genre,
                         duration: movie.duration,
@@ -278,7 +278,7 @@ function UserHomePage2() {
                               }}
                             >
                               <img
-                                src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+                                src={`https://movie-backend-1-a9jv.onrender.com/movie_poster/${movie.poster_url}`}
                                 className="card-img-top movie-poster"
                                 alt={movie.title}
                                 style={{
@@ -318,7 +318,7 @@ function UserHomePage2() {
   if (movie.StreamingType === "In-Theaters") {
     const data = {
       movie_id: movie._id,
-      poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
+      poster_url: `https://movie-backend-1-a9jv.onrender.com/movie_poster/${movie.poster_url}`,
       title: movie.title,
       genre: movie.genre,
       duration: movie.duration,
@@ -364,7 +364,7 @@ function UserHomePage2() {
             }}
           >
             <img
-              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+              src={`https://movie-backend-1-a9jv.onrender.com/movie_poster/${movie.poster_url}`}
               className="card-img-top movie-poster"
               alt={movie.title}
               style={{
@@ -403,7 +403,7 @@ function UserHomePage2() {
               {movies.map((movie) => {
   const data = {
     movie_id: movie._id,
-    poster_url: `http://localhost:5000/movie_poster/${movie.poster_url}`,
+    poster_url: `https://movie-backend-1-a9jv.onrender.com/movie_poster/${movie.poster_url}`,
     title: movie.title,
     genre: movie.genre,
     duration: movie.duration,
@@ -453,7 +453,7 @@ function UserHomePage2() {
             }}
           >
             <img
-              src={`http://localhost:5000/movie_poster/${movie.poster_url}`}
+              src={`https://movie-backend-1-a9jv.onrender.com/movie_poster/${movie.poster_url}`}
               className="card-img-top movie-poster"
               alt={movie.title}
               style={{
@@ -524,7 +524,7 @@ function UserHomePage2() {
     >
       <div className="card" style={{ height: "400px", overflow: "hidden" }}>
         <img
-          src={`http://localhost:5000/event_poster/${eventData.poster_url}`}
+          src={`https://movie-backend-1-a9jv.onrender.com/event_poster/${eventData.poster_url}`}
           className="card-img-top"
           alt={eventData.event_name}
           style={{ objectFit: "cover", height: "100%" }}

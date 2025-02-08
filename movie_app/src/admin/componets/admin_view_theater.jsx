@@ -17,7 +17,7 @@ function AdminViewTheater(prop) {
    
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/theaters", {
+        const response = await axios.get("https://movie-backend-1-a9jv.onrender.com/api/theaters", {
           params: { theater_email: temail },
         });
   
@@ -39,7 +39,7 @@ function AdminViewTheater(prop) {
       
       console.log(email)
       setStatusUpdated(false);
-      const response = await axios.patch("http://localhost:5000/api/approvetheaters", 
+      const response = await axios.patch("https://movie-backend-1-a9jv.onrender.com/api/approvetheaters", 
       { status: tstatus,
         email:email,
     });

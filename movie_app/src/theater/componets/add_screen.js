@@ -50,7 +50,7 @@ function AddScreen() {
         const orientation = unavailableseats.join(',');
         console.log(orientation);
 
-        axios.post("http://localhost:5000/api/addnewscreen", {
+        axios.post("https://movie-backend-1-a9jv.onrender.com/api/addnewscreen", {
             theaterid,
             type,
             screentype,

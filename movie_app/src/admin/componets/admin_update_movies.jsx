@@ -22,7 +22,7 @@ function UpdateMovie() {
   useEffect(() => {
     // Fetch movie details by movieId and populate the form fields
     axios
-      .get(`http://localhost:5000/api/movies/${movieid}`)
+      .get(`https://movie-backend-1-a9jv.onrender.com/api/movies/${movieid}`)
       .then((response) => {
         console.log(response.data);
         const movieData = response.data[0];

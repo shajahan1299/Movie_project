@@ -13,7 +13,7 @@ function AdminViewPostedMovies() {
 
   useEffect(() => {
     if (userid) {
-      axios.get(`http://localhost:5000/api/geteventbyid/${userid}`)
+      axios.get(`https://movie-backend-1-a9jv.onrender.com/api/geteventbyid/${userid}`)
         .then(response => {
           setEvents(response.data);
         })

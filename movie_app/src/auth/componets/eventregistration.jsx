@@ -11,7 +11,7 @@ function EventRegistration() {
     {
       console.log(data);
       
-      axios.post('http://localhost:5000/api/hostreg', data)
+      axios.post('https://movie-backend-1-a9jv.onrender.com/api/hostreg', data)
      .then((response) => {
        console.log('Host Registered:', response.data);
        if(response.data.navigation===true)

@@ -11,7 +11,7 @@ function Theaterregistration() {
      {
        console.log(data);
        
-       axios.post('http://localhost:5000/api/theaterreg', data)
+       axios.post('https://movie-backend-1-a9jv.onrender.com/api/theaterreg', data)
       .then((response) => {
         console.log('Theater Registered:', response.data);
         if(response.data.navigation===true)

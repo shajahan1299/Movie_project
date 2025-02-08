@@ -77,7 +77,7 @@ function AddNewEvent() {
     }
 
     axios
-      .post("http://localhost:5000/api/addevent", formData)
+      .post("https://movie-backend-1-a9jv.onrender.com/api/addevent", formData)
       .then((response) => {
         console.log("Success:", response.data); // Use response.data.message if available
         alert(response.data.message);

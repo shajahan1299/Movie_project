@@ -6,7 +6,7 @@ function Adminviewaddedmovies() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/getmovies")
+      .get("https://movie-backend-1-a9jv.onrender.com/api/getmovies")
       .then((response) => {
         setMovies(response.data);
       })

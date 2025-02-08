@@ -147,7 +147,7 @@ function UserSelectSeat() {
     }
   
     // creating a new order
-    const result = await axios.post("http://localhost:5000/payment/orders",{totalPrice});
+    const result = await axios.post("https://movie-backend-1-a9jv.onrender.com/payment/orders",{totalPrice});
   
     if (!result) {
         alert("Server error. Are you online?");
@@ -173,7 +173,7 @@ function UserSelectSeat() {
                 razorpaySignature: response.razorpay_signature,
             };
   
-            const result = await axios.post("http://localhost:5000/payment/success", data);
+            const result = await axios.post("https://movie-backend-1-a9jv.onrender.com/payment/success", data);
             if (result.data.msg === 'success') {
               alert("Payment done successfully!. Your booking is processing");
           }          

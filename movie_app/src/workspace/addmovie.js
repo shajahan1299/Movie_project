@@ -30,7 +30,7 @@ function AdminAddMovie() {
         }
 
         axios
-            .post("http://localhost:5000/api/addmovies", formData)
+            .post("https://movie-backend-1-a9jv.onrender.com/api/addmovies", formData)
             .then((response) => {
                 console.log("Success:", response);
                 alert(response.data.message);

@@ -47,7 +47,7 @@ function CommentBox(props) {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/postcomment/${props.filmid}`);
+                const response = await axios.get(`https://movie-backend-1-a9jv.onrender.com/api/postcomment/${props.filmid}`);
                 setComments(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -67,7 +67,7 @@ function CommentBox(props) {
 
         // Make an Axios POST request to submit a new comment
         try {
-            const response = await axios.post("http://localhost:5000/api/postcomment", {
+            const response = await axios.post("https://movie-backend-1-a9jv.onrender.com/api/postcomment", {
                 userId: userId,
                 filmid: props.filmid,
                 comment: comment,
@@ -90,7 +90,7 @@ function CommentBox(props) {
     const deleteComment = async (commentid) => {
         try {
           // Send a DELETE request to the server with the comment ID
-          await axios.delete(`http://localhost:5000/api/postcomment/${commentid}`);
+          await axios.delete(`https://movie-backend-1-a9jv.onrender.com/api/postcomment/${commentid}`);
           setRefresh(!refresh);
         } catch (error) {
           // Handle errors here

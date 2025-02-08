@@ -16,7 +16,7 @@ const LikeDislikeButton = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:5000/api/like/count', { shortFilmId, userId });
+        const response = await axios.post('https://movie-backend-1-a9jv.onrender.com/api/like/count', { shortFilmId, userId });
         if (response.data.success) {
           setLikes(response.data.likeCount);
           setDislikes(response.data.dislikeCount);
@@ -35,7 +35,7 @@ const LikeDislikeButton = (props) => {
   const handleLike = () => {
     const actionlike = liked ? 'null' : 'like';
     const actiondislike = 'null';
-    axios.post('http://localhost:5000/api/like', { userId, shortFilmId, actionlike, actiondislike })
+    axios.post('https://movie-backend-1-a9jv.onrender.com/api/like', { userId, shortFilmId, actionlike, actiondislike })
       .then(response => {
         if (response.data.success) {
           setLikes(liked ? likes - 1 : likes + 1);
@@ -57,7 +57,7 @@ const LikeDislikeButton = (props) => {
   const handleDislike = () => {
     const actionlike = 'null';
     const actiondislike = disliked ? 'null' : 'unlike';
-    axios.post('http://localhost:5000/api/like', { userId, shortFilmId, actionlike, actiondislike })
+    axios.post('https://movie-backend-1-a9jv.onrender.com/api/like', { userId, shortFilmId, actionlike, actiondislike })
       .then(response => {
         if (response.data.success) {
           setDislikes(disliked ? dislikes - 1 : dislikes + 1);

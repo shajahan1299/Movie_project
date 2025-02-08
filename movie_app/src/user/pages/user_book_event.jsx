@@ -124,7 +124,7 @@ function UserBookEvents() {
     }
 
     // creating a new order
-    const result = await axios.post("http://localhost:5000/payment/orders", {
+    const result = await axios.post("https://movie-backend-1-a9jv.onrender.com/payment/orders", {
       totalPrice,
     });
 
@@ -153,7 +153,7 @@ function UserBookEvents() {
         };
 
         const result = await axios.post(
-          "http://localhost:5000/payment/success",
+          "https://movie-backend-1-a9jv.onrender.com/payment/success",
           data
         );
         if (result.data.msg === "success") {

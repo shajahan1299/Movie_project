@@ -77,7 +77,7 @@ function AddShortFilm() {
 
     // Send data using Axios
     axios
-      .post("http://localhost:5000/api/addshortfilm", formData)
+      .post("https://movie-backend-1-a9jv.onrender.com/api/addshortfilm", formData)
       .then((response) => {
         console.log("Form submitted successfully:", response.data);
         alert("Submitted successfully");

@@ -28,7 +28,7 @@ function AdminViewTheaterLogin() {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/theaterlogin"
+          "https://movie-backend-1-a9jv.onrender.com/api/theaterlogin"
         );
         console.log(response.data);
         setTheaters(response.data);

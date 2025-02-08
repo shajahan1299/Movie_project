@@ -9,7 +9,7 @@ function Register() {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const onSubmit = (data) => {
         console.log(data);
-        axios.post("http://localhost:5000/api/register", data)
+        axios.post("https://movie-backend-1-a9jv.onrender.com/api/register", data)
             .then((response) => {
                 console.log("Success:", response);
                 alert(response.data.message);
